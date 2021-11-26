@@ -296,12 +296,12 @@ public class ReadWriteEncryptDecryptTextFile
         
         foreach(UserModel user in allUsers)
         {
-            if(page == "login" && user.Username == username && user.Password == password )
+            if(page == "login" && user.Username.ToLower() == username.ToLower() && user.Password == password )
             {
                 userExist = true;
                 break;
             }
-            else if(page == "register" && user.Username == username)
+            else if(page == "register" && user.Username.ToLower() == username.ToLower())
             {
                 userExist = true;
                 break;
