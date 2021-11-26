@@ -10,7 +10,7 @@ public class UserModel
     {
         LastName = lastName;
         FirstName = firstName;
-        Username = username;
+        Username = username.ToLower();
         Password =  password;
     }
 

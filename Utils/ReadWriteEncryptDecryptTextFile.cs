@@ -86,9 +86,9 @@ public class ReadWriteEncryptDecryptTextFile
         try
         {
             Dictionary<string, List<PasswordsModel>> allPasswords = ReadPasswordsJsonFile();
-            if(allPasswords.ContainsKey(passwordKeeperUsername))
+            if(allPasswords.ContainsKey(passwordKeeperUsername.ToLower()))
             {
-               List<PasswordsModel> thisUserPasswords = allPasswords[passwordKeeperUsername];
+               List<PasswordsModel> thisUserPasswords = allPasswords[passwordKeeperUsername.ToLower()];
                List<PasswordsModel> thisUserPasswordsCopy = thisUserPasswords.ToList();
 
                Console.WriteLine("Search Results:");
@@ -145,11 +145,11 @@ public class ReadWriteEncryptDecryptTextFile
                {
                     if(thisUserPasswordsCopy.Count <= 0)
                     {
-                        allPasswords.Remove(passwordKeeperUsername);
+                        allPasswords.Remove(passwordKeeperUsername.ToLower());
                     }
                     else
                     {
-                        allPasswords[passwordKeeperUsername] = thisUserPasswordsCopy;
+                        allPasswords[passwordKeeperUsername.ToLower()] = thisUserPasswordsCopy;
                     }
                     string json = JsonSerializer.Serialize(allPasswords);
                     string fileName = "Passwords.json";
@@ -176,11 +176,11 @@ public class ReadWriteEncryptDecryptTextFile
         try
         {
             Dictionary<string, List<PasswordsModel>> allPasswords = ReadPasswordsJsonFile();
-            if(allPasswords.ContainsKey(passwordKeeperUsername))
+            if(allPasswords.ContainsKey(passwordKeeperUsername.ToLower()))
             {
                Console.WriteLine(" ");
                Console.WriteLine($"{passwordKeeperUsername}'s PASSWORDS:");
-               List<PasswordsModel> thisUserPasswords = allPasswords[passwordKeeperUsername];
+               List<PasswordsModel> thisUserPasswords = allPasswords[passwordKeeperUsername.ToLower()];
                foreach(PasswordsModel password in thisUserPasswords)
                {
                    Console.WriteLine($"Site Name: {password.SiteName}");
@@ -208,16 +208,16 @@ public class ReadWriteEncryptDecryptTextFile
         {
             Dictionary<string, List<PasswordsModel>> allPasswords = ReadPasswordsJsonFile();
             List<PasswordsModel> thisUserPasswords = new List<PasswordsModel>();
-            if(allPasswords.ContainsKey(passwordKeeperUsername))
+            if(allPasswords.ContainsKey(passwordKeeperUsername.ToLower()))
             {
-                thisUserPasswords = allPasswords[passwordKeeperUsername];
+                thisUserPasswords = allPasswords[passwordKeeperUsername.ToLower()];
                 thisUserPasswords.Add(newPassword);
-                allPasswords[passwordKeeperUsername] = thisUserPasswords;
+                allPasswords[passwordKeeperUsername.ToLower()] = thisUserPasswords;
             }
             else
             {
                 thisUserPasswords.Add(newPassword);
-                allPasswords.Add(passwordKeeperUsername, thisUserPasswords);
+                allPasswords.Add(passwordKeeperUsername.ToLower(), thisUserPasswords);
             }
             string json = JsonSerializer.Serialize(allPasswords);
             string fileName = "Passwords.json";
